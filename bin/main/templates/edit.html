@@ -14,7 +14,7 @@
 		<h3 th:text="${success}"></h3>
 	</div>
 		<form class="form-signin m-auto" method="POST" th:action="@{/edit/{id}(id=${manageDates.id})}"
-		 th:object="${manageDatesForm}" style="max-width: 50%;">
+		 th:object="${manageDates}" style="max-width: 50%;">
 			  
 			  <div class="form-group">
 			    <label for = "name">日付け名</label>

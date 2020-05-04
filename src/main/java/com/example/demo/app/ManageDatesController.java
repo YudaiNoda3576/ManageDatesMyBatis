@@ -1,6 +1,7 @@
 package com.example.demo.app;
 
 import java.time.LocalDate;
+
 import java.util.List;
 
 
@@ -55,32 +56,24 @@ public class ManageDatesController {
 	
 //	新規登録
 	@GetMapping("/create")
-	public String create(ManageDatesForm manageDatesForm, Model model) {
-		model.addAttribute("manageDatesForm", manageDatesForm);
+	public String create(ManageDates manageDates, Model model) {
+		model.addAttribute("manageDates", manageDates);
 		return"/create";
 	}
 	
 	@PostMapping("/create")
-	public String create(@ModelAttribute @Validated ManageDatesForm manageDatesForm, 
+	public String create(@ModelAttribute @Validated ManageDates manageDates, 
 			BindingResult result, 
 			Model model, 
 			RedirectAttributes redirectAttributes) {
-//		Formの値をEntityへ詰め直す
-		ManageDates manageDates = new ManageDates();
-		
-		manageDates.setId(manageDatesForm.getId());
-		manageDates.setName(manageDatesForm.getName());
-		manageDates.setYear(manageDatesForm.getYear());
-		manageDates.setMonth(manageDatesForm.getMonth());
-		manageDates.setDate(manageDatesForm.getDate());
-	
+
 		if(!result.hasErrors()) {
 			manageDatesService.insert(manageDates);
 			redirectAttributes.addFlashAttribute("success", "新規登録が完了しました");
 			return "redirect:/index";
 		} else {
 			model.addAttribute("manageDatesCal", manageDatesService.findAll());
-			model.addAttribute("manageDatesForm", manageDatesForm);
+			model.addAttribute("manageDatesForm", manageDates);
 			model.addAttribute("failed", "不正値に誤りがあります");
 			return "create";
 		}
@@ -98,19 +91,12 @@ public class ManageDatesController {
 		
 
 	@PostMapping("/edit/{id}")
-	public String update(@PathVariable String id, @ModelAttribute ManageDatesForm manageDatesForm,
+	public String update(@PathVariable String id, @ModelAttribute ManageDates manageDates,
 			Model model, RedirectAttributes redirectAttributes) {
 			
-		ManageDates manageDates = new ManageDates();
-		
-		BeanUtils.copyProperties(manageDatesForm, manageDates);
-
 	 	manageDates.setId(id);
-	 	
 	 	manageDatesService.update(manageDates);
- 
 		redirectAttributes.addFlashAttribute("success", "更新が完了しました");
-		
 		return "redirect:/";
 	}
 	
