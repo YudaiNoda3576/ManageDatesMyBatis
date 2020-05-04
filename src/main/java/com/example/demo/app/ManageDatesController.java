@@ -1,6 +1,7 @@
 package com.example.demo.app;
 
 import java.time.LocalDate;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.ManageDates;
+import com.example.demo.domain.SearchForm;
 import com.example.demo.service.ManageDatesService;
 
 @Controller
@@ -95,7 +97,7 @@ public class ManageDatesController {
 	 	manageDates.setId(id);
 	 	manageDatesService.update(manageDates);
 		redirectAttributes.addFlashAttribute("success", "更新が完了しました");
-		return "redirect:/";
+		return "redirect:/index";
 	}
 	
 	

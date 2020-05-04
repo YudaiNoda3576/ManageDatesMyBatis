@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"></meta>
-    <!-- Bootstrapの設定 -->
-    <link th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}" rel="stylesheet"></link>
-    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
-    <title>index</title>
+<meta charset="UTF-8"></meta>
+<!-- Bootstrapの設定 -->
+<link th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"
+	rel="stylesheet"></link>
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+<title>index</title>
 </head>
 <body class="text-center mauto">
-<h3>計算の基準となる日付けを入力してください（８桁）</h3>
-<h3 style="color:blue;" th:text="${success}"></h3>
-<h3 style="color:red;" th:text="${failed}"></h3>
+	<h3>計算の基準となる日付けを入力してください（８桁）</h3>
 	<div th:object=${searchForm}>
-	 	<form action="/" method="post" style="justify-content: center;">
-		 	<div class="form-group">
-				<input type="text" name="input" th:value="${val}"/>
-		 	</div>
-				<button class="btn btn-primary" type="submit" >計算実行</button>
-		</form> 
+		<h3 style="color: blue;" th:text="${success}"></h3>
+		<h3 style="color: red;" th:text="${failed}"></h3>
+		<form action="/" method="post" style="justify-content: center;">
+			<div class="form-group">
+				<input type="text" name="input" th:value="${val}" />
+			</div>
+			<button class="btn btn-primary" type="submit">計算実行</button>
+		</form>
 	</div>
-	
+
 	<a class="btn btn-warning" role="button" th:href="@{/create}">新規登録</a>
-		
+
 	<div class="table m-auto" style="position: relative; overflow: hidden;">
 		<div style="position: relative; left: 50%; float: left;">
 			<table
@@ -85,6 +86,6 @@
 			</table>
 		</div>
 	</div>
-	
+
 </body>
 </html>
