@@ -1,13 +1,11 @@
 package com.example.demo.app;
 
 import java.time.LocalDate;
-
 import java.util.List;
 
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +22,7 @@ import com.example.demo.service.ManageDatesService;
 
 @Controller
 @RequestMapping("/")
+@Transactional
 public class ManageDatesController {
 	
 	@Autowired
@@ -93,7 +92,6 @@ public class ManageDatesController {
 	@PostMapping("/edit/{id}")
 	public String update(@PathVariable String id, @ModelAttribute ManageDates manageDates,
 			Model model, RedirectAttributes redirectAttributes) {
-			
 	 	manageDates.setId(id);
 	 	manageDatesService.update(manageDates);
 		redirectAttributes.addFlashAttribute("success", "更新が完了しました");

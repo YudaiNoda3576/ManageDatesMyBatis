@@ -9,13 +9,14 @@ import com.example.demo.domain.ManageDates;
 
 @Mapper
 public interface ManageDatesMapper {
-	public List<ManageDates> findAll();
 	
-	public ManageDates findOne(String id);
+	List<ManageDates> findAll();
 	
-	public void insert(ManageDates manageDates);
+	ManageDates findOne(String id);
 	
-	public int update(ManageDates manageDates);
+	void insert(ManageDates manageDates);
 	
-	public int delete(String id);
+	boolean update(ManageDates manageDates);
+	
+	boolean delete(String id);
 }

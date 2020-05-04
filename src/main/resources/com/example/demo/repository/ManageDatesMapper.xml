@@ -7,19 +7,19 @@
 		SELECT
 		*
 		FROM
-		manage_dates2
+		manage_dates
 	</select>
 
 	<select id="findOne"
 		resultType="com.example.demo.domain.ManageDates">
-		select * from manage_dates2 where id =
+		select * from manage_dates where id =
 		#{id}
 	</select>
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO
-		manage_dates2
+		manage_dates
 		(id, name, year, month, date)
 		VALUES
 		(#{id}, #{name}, #{year}, #{month},
@@ -28,7 +28,7 @@
 
 	<update id="update">
 		UPDATE
-		manage_dates2
+		manage_dates
 		SET
 		id = #{id}, name = #{name}, year =
 		#{year}, month = #{month}, date =
@@ -40,7 +40,7 @@
 	<delete id="delete">
 		DELETE
 		FROM
-		manage_dates2
+		manage_dates
 		WHERE
 		id = #{id}
 	</delete>
