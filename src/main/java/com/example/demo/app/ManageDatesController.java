@@ -46,7 +46,7 @@ public class ManageDatesController {
 //		計算結果
 		if(!result.hasErrors()) {
 			List<LocalDate>manageDatesCalResult = manageDatesRestService.search(input);
-			model.addAttribute("manageDatesCal", manageDatesRestService.findAll());
+			model.addAttribute("manageDatesCal", manageDatesRestService.getAllResponse());
 			model.addAttribute("manageDatesCalResult", manageDatesCalResult);
 			model.addAttribute("val", input);
 		} else {
@@ -86,7 +86,7 @@ public class ManageDatesController {
 	public String getId(@PathVariable String id, 
 		    Model model,
 			RedirectAttributes redirectAttributes) {
-		ManageDates result = manageDatesRestService.findOne(id);
+		ManageDates result = manageDatesRestService.getId(id);
 		model.addAttribute("manageDates", result);
 		return "edit";
 	}
