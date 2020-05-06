@@ -1,6 +1,7 @@
 package com.example.demo.app;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,18 +18,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.ManageDates;
-import com.example.demo.service.ManageDatesService;
+import com.example.demo.service.ManageDatesRestService;
 
 @RestController
 @RequestMapping("/api")
 public class ManageDatesRestController {
 	@Autowired
-	ManageDatesService manageDatesService;
+	ManageDatesRestService manageDatesRestService;
 	
 //	全件取得
 	@GetMapping("findAll")
 	public List<ManageDates>getManageDates() {
-		List<ManageDates>manageDates = manageDatesService.findAll();
+		List<ManageDates>manageDates = manageDatesRestService.findAll();
 		return manageDates;
 	}
 	
@@ -37,7 +38,7 @@ public class ManageDatesRestController {
 	public List<LocalDate> search(@PathVariable("id") String id) {
 		List<LocalDate>list = new ArrayList<LocalDate>();
 		if(id != null) {
-			return manageDatesService.search(id);
+			return manageDatesRestService.search(id);
 		} else {
 			list.add(LocalDate.now());
 			return list;
@@ -47,29 +48,30 @@ public class ManageDatesRestController {
 	
 //	一件検索
 	@GetMapping("findOne/{id}")
-	public ManageDates findOne(@PathVariable String id) {
-		ManageDates manageDates = manageDatesService.findOne(id);
+	public ManageDates getManageDateOne(@PathVariable String id) {
+		ManageDates manageDates = manageDatesRestService.findOne(id);
 		return manageDates;
 	}
 	
 //	新規登録
-	@PostMapping("insert")
+	@PostMapping("/insert")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void insert(@RequestBody ManageDates manageDates) {
-		manageDatesService.insert(manageDates);
+//	RequestBodyでHTTPリクエストのボディ部分を引数にマッピングできる。これで、POSTメソッドでもユーザー情報の受け取りができる。
+	public void postManageDateOne(@RequestBody ManageDates manageDates) {
+		manageDatesRestService.insert(manageDates);
 	}
 	
 //　一件更新
 	@PutMapping("update/{id}")
 	public boolean update(@RequestBody ManageDates manageDates) {
-		return manageDatesService.update(manageDates);
+		return manageDatesRestService.update(manageDates);
 	}
 	
 //	削除
-	@DeleteMapping("delete/{}id")
+	@DeleteMapping("delete/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public boolean delete(@PathVariable("id") String id) {
-		return manageDatesService.delete(id);
+		return manageDatesRestService.delete(id);
 	}
 	
 	

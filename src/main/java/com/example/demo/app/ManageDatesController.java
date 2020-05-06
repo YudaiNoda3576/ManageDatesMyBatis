@@ -2,6 +2,7 @@ package com.example.demo.app;
 
 import java.time.LocalDate;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.ManageDates;
 import com.example.demo.domain.SearchForm;
-import com.example.demo.service.ManageDatesRestService;
 import com.example.demo.service.ManageDatesService;
 
 @Controller
@@ -28,8 +28,11 @@ import com.example.demo.service.ManageDatesService;
 @Transactional
 public class ManageDatesController {
 	
+//	@Autowired
+//	ManageDatesRestService manageDatesRestService;
+	
 	@Autowired
-	ManageDatesRestService manageDatesRestService;
+	ManageDatesService manageDatesService;
 
 	
 	@GetMapping("/index")
@@ -45,8 +48,8 @@ public class ManageDatesController {
 			Model model) {
 //		計算結果
 		if(!result.hasErrors()) {
-			List<LocalDate>manageDatesCalResult = manageDatesRestService.search(input);
-			model.addAttribute("manageDatesCal", manageDatesRestService.getAllResponse());
+			List<LocalDate>manageDatesCalResult = manageDatesService.search(input);
+			model.addAttribute("manageDatesCal", manageDatesService.findAll());
 			model.addAttribute("manageDatesCalResult", manageDatesCalResult);
 			model.addAttribute("val", input);
 		} else {
@@ -70,11 +73,11 @@ public class ManageDatesController {
 			RedirectAttributes redirectAttributes) {
 
 		if(!result.hasErrors()) {
-			manageDatesRestService.insert(manageDates);
+			manageDatesService.insert(manageDates);
 			redirectAttributes.addFlashAttribute("success", "新規登録が完了しました");
 			return "redirect:/index";
 		} else {
-			model.addAttribute("manageDatesCal", manageDatesRestService. getAllResponse());
+			model.addAttribute("manageDatesCal", manageDatesService. findAll());
 			model.addAttribute("manageDatesForm", manageDates);
 			model.addAttribute("failed", "不正値に誤りがあります");
 			return "create";
@@ -86,7 +89,7 @@ public class ManageDatesController {
 	public String getId(@PathVariable String id, 
 		    Model model,
 			RedirectAttributes redirectAttributes) {
-		ManageDates result = manageDatesRestService.getId(id);
+		ManageDates result = manageDatesService.findOne(id);
 		model.addAttribute("manageDates", result);
 		return "edit";
 	}
@@ -96,7 +99,7 @@ public class ManageDatesController {
 	public String update(@PathVariable String id, @ModelAttribute ManageDates manageDates,
 			Model model, RedirectAttributes redirectAttributes) {
 	 	manageDates.setId(id);
-	 	manageDatesRestService.update(manageDates);
+	 	manageDatesService.update(manageDates);
 		redirectAttributes.addFlashAttribute("success", "更新が完了しました");
 		return "redirect:/index";
 	}
@@ -104,7 +107,7 @@ public class ManageDatesController {
 	
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable String id, Model model) {
-		manageDatesRestService.delete(id);
+		manageDatesService.delete(id);
 		model.addAttribute("success", "削除が成功しました");
 		return "redirect:/index";
 	}
