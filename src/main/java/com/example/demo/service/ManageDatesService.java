@@ -26,7 +26,7 @@ public class ManageDatesService {
 		return manageDatesMapper.findAll();
 	}
 	
-	//全体検索結果に計算を行う	
+	//全体検索結果に対して計算を行う	
 	public List<LocalDate> search(String input) {
 //		入力値をlocalDateに変換
 		DateTimeFormatter formatter = new DateTimeFormatterBuilder()
@@ -39,8 +39,8 @@ public class ManageDatesService {
 		List<ManageDates> manageDates = manageDatesMapper.findAll();
 			
 		List<LocalDate> sumDate = new ArrayList<LocalDate>();
-//			各レコードから計算用の年月日を取得。入力値と合算させる。
-		for(com.example.demo.domain.ManageDates n : manageDates) {
+//		各レコードから計算用の年月日を取得。入力値と合算させる。
+		for(ManageDates n : manageDates) {
 			int dbYear = n.getYear();
 			int dbMonth = n.getMonth();
 			int dbDate = n.getDate();

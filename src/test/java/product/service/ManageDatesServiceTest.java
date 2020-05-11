@@ -24,15 +24,15 @@ import com.example.demo.service.ManageDatesService;
 @ExtendWith(MockitoExtension.class)
 @DisplayName("ManageDatesServiceの単体テスト")
 public class ManageDatesServiceTest {
+//	ダミーオブジェクト
 	@Mock
 	private ManageDatesMapper manageDatesMapper; 
-	
+//	テスト対象のクラス
 	@InjectMocks 
 	private ManageDatesService manageDatesService;
 	
 	@Test
 	@DisplayName("全件取得で0件の場合のテスト")
-	
 	void testFindAllReturnEmpty() {
 //		空のリスト
 		List<ManageDates> list = new ArrayList<>();
@@ -47,7 +47,7 @@ public class ManageDatesServiceTest {
 	}
 	
 	@Test
-	@DisplayName("テーブルManageDatesの全件取得で２件の場合のテスト")
+	@DisplayName("全件取得で２件の場合のテスト")
 	
 	void testFindAllReturnKist() {
 		
@@ -66,4 +66,26 @@ public class ManageDatesServiceTest {
 //		戻り値の検査
 		assertEquals(2, actualList.size());
 	}
+	
+	@Test
+	@DisplayName("タスクを一件取得した場合のテスト")
+		void testGetIDReturnOne() {		
+//	インスタンス化
+		ManageDates manageDates = new ManageDates();
+		String id = "Y01";
+		when(manageDatesMapper.findOne(id)).thenReturn(manageDates);
+//		サービスの実行
+		ManageDates actualManageDates = manageDatesService.findOne(id);
+		
+		verify(manageDatesMapper, times(1)).findAll();
+		
+		assertEquals(0, actualManageDates.getId());
+	}
+	
+	@Test
+	@DisplayName("削除対象が存在しない場合、例外が発生することを確認するテスト")
+	void throwNotFoundException(){
+	
+	}
+	
 }
