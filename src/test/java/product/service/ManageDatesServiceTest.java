@@ -45,4 +45,25 @@ public class ManageDatesServiceTest {
 //		戻り値の検査
 		assertEquals(0, actualList.size());
 	}
+	
+	@Test
+	@DisplayName("テーブルManageDatesの全件取得で２件の場合のテスト")
+	
+	void testFindAllReturnKist() {
+		
+//		モックから返すListに2つのTaskオブジェクトをセット
+		List<ManageDates> list = new ArrayList<>();
+		ManageDates md1 = new ManageDates();
+		ManageDates md2 = new ManageDates();
+		list.add(md1);
+		list.add(md2);
+//		モッククラスのI/O
+		when(manageDatesMapper.findAll()).thenReturn(list);
+//		サービスを実行
+		List<ManageDates> actualList = manageDatesService.findAll();
+//		モックの指定メソッドの実行回数を検査
+		verify(manageDatesMapper, times(1)).findAll();
+//		戻り値の検査
+		assertEquals(2, actualList.size());
+	}
 }
