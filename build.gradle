@@ -32,6 +32,8 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testCompile "org.junit.jupiter:junit-jupiter-api:5.0.0-M3"
+	testRuntime "org.junit.jupiter:junit-jupiter-engine:5.0.0-M3"
 	// https://mvnrepository.com/artifact/org.webjars/bootstrap
     compile group: 'org.webjars', name: 'bootstrap', version: '4.4.1'
     // https://mvnrepository.com/artifact/org.webjars.bower/jquery
