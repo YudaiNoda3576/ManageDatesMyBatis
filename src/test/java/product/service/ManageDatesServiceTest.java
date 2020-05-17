@@ -21,6 +21,7 @@ import com.example.demo.service.ManageDatesService;
 
 
 
+
 @ExtendWith(MockitoExtension.class)
 @DisplayName("ManageDatesServiceの単体テスト")
 public class ManageDatesServiceTest {
@@ -31,9 +32,10 @@ public class ManageDatesServiceTest {
 	@InjectMocks 
 	private ManageDatesService manageDatesService;
 	
+	
 	@Test
 	@DisplayName("全件取得で0件の場合のテスト")
-	void testFindAllReturnEmpty() {
+	void 全件取得で0件の場合0件で結果が返ってくること() {
 //		空のリスト
 		List<ManageDates> list = new ArrayList<>();
 //		モッククラスのI/Oをセット
@@ -67,25 +69,39 @@ public class ManageDatesServiceTest {
 		assertEquals(2, actualList.size());
 	}
 	
-	@Test
-	@DisplayName("タスクを一件取得した場合のテスト")
-		void testGetIDReturnOne() {		
-//	インスタンス化
-		ManageDates manageDates = new ManageDates();
-		String id = "Y01";
-		when(manageDatesMapper.findOne(id)).thenReturn(manageDates);
-//		サービスの実行
-		ManageDates actualManageDates = manageDatesService.findOne(id);
-		
-		verify(manageDatesMapper, times(1)).findAll();
-		
-		assertEquals(0, actualManageDates.getId());
-	}
+//	@Test
+////	このコードだとDBの接続ありきの話になってる
+////	実際にやるのは、serviceからidを指定した時に値を引っ張ってこれるかどうかのテスト
+////	DB接続ありきではなく、ここで値を設定する
+//	@DisplayName("一件取得した場合のテスト")
+//		void testGetIdReturnOne() {		
+////	インスタンス化
+//		ManageDates manageDates = new ManageDates();
+//		String id = "Y01";
+//		when(manageDatesMapper.findOne(id)).thenReturn(manageDates);
+////		サービスの実行
+//		ManageDates actualManageDates = manageDatesService.findOne(id);
+//		
+//		verify(manageDatesMapper, times(1)).findOne(id);
+//		
+//		assertEquals(id, actualManageDates.getId());
+//	}
 	
 	@Test
-	@DisplayName("削除対象が存在しない場合、例外が発生することを確認するテスト")
-	void throwNotFoundException(){
+	@DisplayName("一件取得した場合のテスト")
+	void testGetIdReturnOne() {		
+//インスタンス化
+	ManageDates manageDates = new ManageDates();
+	final String TABLE = "manage_dates_test";
+	final String SELECT_SQL = String.format("SELECT * FROM manage_dates_test WHERE ID = ?" , TABLE);
+	String id = "Y01";
+	when(manageDatesMapper.findOne(id)).thenReturn(manageDates);
+}
 	
-	}
+//	@Test
+//	@DisplayName("削除対象が存在しない場合、例外が発生することを確認するテスト")
+//	void throwNotFoundException(){
+//	
+//	}
 	
 }

@@ -36,6 +36,7 @@ public class ManageDatesService {
 			.toFormatter();
 		LocalDate inputDate = LocalDate.parse(input, formatter); 
 			
+//		データモックの作成してテスト 日付入力パターン・しなかったパターンなど
 		List<ManageDates> manageDates = manageDatesMapper.findAll();
 			
 		List<LocalDate> sumDate = new ArrayList<LocalDate>();
