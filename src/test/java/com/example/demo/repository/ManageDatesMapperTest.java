@@ -1,8 +1,8 @@
-package product.repository;
+package com.example.demo.repository;
 
 
 
-import static org.hamcrest.CoreMatchers.*;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,27 +14,28 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataAccessException;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import com.example.demo.domain.ManageDates;
 import com.example.demo.repository.ManageDatesMapper;
 
 
-@RunWith(SpringRunner.class)
-@MybatisTest
-@TestPropertySource(locations = "classpath:test.properties")
-@DisplayName("ManageDatesMapperの単体テスト")
-@Transactional
+
+@SpringJUnitConfig //Junit5上でSpring TestContext Frameworkを利用することを示す
+@SpringBootTest //毎回サーバ起動
+@ActiveProfiles("unit")//application-unit.ymlのunitを対応（DBの設定を読み込む）
+@DisplayName("ManageDatesServiceの結合テスト")
 public class ManageDatesMapperTest {
 	
 	@Autowired
-	ManageDatesMapper sut;
+	private ManageDatesMapper sut;
 	
-	
-
 	
 	@Test
 	@DisplayName("全件検索結果がリストで取得できるかのテスト")
