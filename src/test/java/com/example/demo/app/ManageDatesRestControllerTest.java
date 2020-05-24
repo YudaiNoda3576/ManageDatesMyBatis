@@ -1,4 +1,4 @@
-package product.controller;
+package com.example.demo.app;
 
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;

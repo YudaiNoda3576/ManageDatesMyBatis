@@ -30,7 +30,7 @@ import com.example.demo.repository.ManageDatesMapper;
 @SpringJUnitConfig //Junit5上でSpring TestContext Frameworkを利用することを示す
 @SpringBootTest //毎回サーバ起動
 @ActiveProfiles("unit")//application-unit.ymlのunitを対応（DBの設定を読み込む）
-@DisplayName("ManageDatesServiceの結合テスト")
+@DisplayName("ManageDatesMapperの結合テスト")
 public class ManageDatesMapperTest {
 	
 	@Autowired

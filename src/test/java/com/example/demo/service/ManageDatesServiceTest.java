@@ -1,9 +1,6 @@
-package practice;
-
-import static org.junit.Assert.assertEquals;
+package com.example.demo.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -22,10 +19,10 @@ import com.example.demo.domain.ManageDates;
 import com.example.demo.repository.ManageDatesMapper;
 import com.example.demo.service.ManageDatesService;
 
-
 @ExtendWith(MockitoExtension.class)
-@DisplayName("モックを用いたテストの練習")
-public class PracticeOfTest {
+@DisplayName("ManageDatesServiceの単体テスト")
+public class ManageDatesServiceTest {
+
 	@Mock
 	private ManageDatesMapper sut;
 //テスト対象のクラス・ モックをインスタンスに挿入
@@ -69,3 +66,4 @@ public class PracticeOfTest {
 	}
 
 }
+
