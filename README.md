@@ -18,8 +18,8 @@
 
 ## Requirement
 
-SpringBoot 2.1.0.RELEASE
-Thymeleaf 3.0.0.RELEASE
+SpringBoot 2.1.13.RELEASE
+
 
 # Usage
 
