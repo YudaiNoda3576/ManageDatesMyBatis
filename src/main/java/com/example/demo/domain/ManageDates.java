@@ -5,7 +5,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
-//このクラスがManageDatesFormの代わりを担っている
+//このクラスがManageDatesFormの役割を担っている
+
 @Data
 public class ManageDates {
 
