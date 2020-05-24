@@ -1,11 +1,5 @@
 package com.example.demo.repository;
 
-
-
-
-
-
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
@@ -53,7 +47,7 @@ public class ManageDatesMapperTest {
 	public void 存在しないデータを検索すると結果がNULLとなること() throws Exception {
 		ManageDates actual = sut.findOne("EmptyData");
 		// TODO:サービス側で修正し、Nullを返さないようにするべき。
-		assertEquals(actual, (null));
+		assertEquals(null, actual);
 	}
 		
 	@Test
@@ -65,13 +59,14 @@ public class ManageDatesMapperTest {
 	
 	@Test
 	public void 新規データの登録ができること() throws Exception {
+//		テスト用Entityクラス
 		ManageDates manageDates = new ManageDates();
 		manageDates.setId("Test");
 		manageDates.setName("テスト");
 		manageDates.setYear(0);
 		manageDates.setMonth(0);
 		manageDates.setDate(0);
-		
+//		テスト用のEntityクラスでメソッドの実行
 		sut.insert(manageDates);
 		ManageDates actual = sut.findOne("Test");
 		
@@ -80,8 +75,23 @@ public class ManageDatesMapperTest {
 	}
 	
 	@Test
-	public 
-
+	public void データの更新が行えること() throws Exception {
+		ManageDates manageDates = new ManageDates();
+		manageDates.setId("Y01");
+		manageDates.setName("更新テスト");
+		manageDates.setYear(0);
+		manageDates.setMonth(0);
+		manageDates.setDate(0);
+//		テスト用のEntityクラスでメソッドの実行
+		sut.update(manageDates);
+		
+		assertEquals("更新テスト", sut.findOne("UpdateTest").getName());
+	}	
 	
-	
+	@Test
+	public void データの削除が行えること() throws Exception {
+		sut.delete("Y01");
+		List<ManageDates> actual = sut.findAll();
+		assertEquals(1, actual.size());
+	}
 }
