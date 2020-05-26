@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
@@ -13,15 +13,12 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.example.demo.domain.ManageDates;
 
-
-
-
 @SpringJUnitConfig //Junit5上でSpring TestContext Frameworkを利用することを示す
 @SpringBootTest //毎回サーバ起動
 @ActiveProfiles("test")//application.ymlのtestを対応（DBの設定を読み込む）
 @DisplayName("ManageDatesMapperの結合テスト")
 public class ManageDatesMapperTest {
-//	実際にデータベースを動かすのでスタブは
+//	実際にデータベースを動かすのでスタブは使用しない
 	@Autowired
 	private ManageDatesMapper sut;
 	
@@ -29,7 +26,7 @@ public class ManageDatesMapperTest {
 	@Test
 	void 全件検索して結果をリストで取得できること() throws Exception {
 		List<ManageDates> actual = sut.findAll();
-		assertEquals(1, actual.size());
+		assertEquals(3, actual.size());
 	}
 	
 	@Test
@@ -37,9 +34,9 @@ public class ManageDatesMapperTest {
 			ManageDates actual = sut.findOne("Y01");
 			assertEquals(actual.getId(),"Y01");
 			assertEquals(actual.getName(),"今週");
-			assertEquals(actual.getYear(), 0);
-			assertEquals(actual.getMonth(), 0);
-			assertEquals(actual.getDate(), 3);
+			assertEquals(actual.getYear(), 1);
+			assertEquals(actual.getMonth(), 1);
+			assertEquals(actual.getDate(), 1);
 	
 	}
 	
@@ -77,7 +74,7 @@ public class ManageDatesMapperTest {
 	@Test
 	public void データの更新が行えること() throws Exception {
 		ManageDates manageDates = new ManageDates();
-		manageDates.setId("Y01");
+		manageDates.setId("Y02");
 		manageDates.setName("更新テスト");
 		manageDates.setYear(0);
 		manageDates.setMonth(0);
@@ -92,6 +89,6 @@ public class ManageDatesMapperTest {
 	public void データの削除が行えること() throws Exception {
 		sut.delete("Y01");
 		List<ManageDates> actual = sut.findAll();
-		assertEquals(1, actual.size());
+		assertEquals(3, actual.size());
 	}
 }
