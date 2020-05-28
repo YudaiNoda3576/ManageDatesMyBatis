@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -26,6 +27,7 @@ import com.example.demo.service.ManageDatesService;
 @Controller
 @RequestMapping("/")
 @Transactional
+
 public class ManageDatesController {
 	
 //	@Autowired
@@ -77,7 +79,7 @@ public class ManageDatesController {
 			redirectAttributes.addFlashAttribute("success", "新規登録が完了しました");
 			return "redirect:/index";
 		} else {
-			model.addAttribute("manageDatesCal", manageDatesService. findAll());
+			model.addAttribute("manageDatesCal", manageDatesService.findAll());
 			model.addAttribute("manageDatesForm", manageDates);
 			model.addAttribute("failed", "不正値に誤りがあります");
 			return "create";
