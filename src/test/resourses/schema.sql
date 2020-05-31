@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS manage_dates_test (
+CREATE TABLE IF NOT EXISTS manage_dates(
   id VARCHAR(20) NOT NULL
   , name VARCHAR(20) NOT NULL
   , year int(20) NOT NULL

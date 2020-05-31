@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.example.demo.domain.ManageDates;
@@ -16,12 +17,12 @@ import com.example.demo.domain.ManageDates;
 @SpringJUnitConfig //Junit5上でSpring TestContext Frameworkを利用することを示す
 @SpringBootTest //毎回サーバ起動
 @ActiveProfiles("test")//application.ymlのtestを対応（DBの設定を読み込む）
+//@TestPropertySource(locations = "/test.properties")
 @DisplayName("ManageDatesMapperの結合テスト")
 public class ManageDatesMapperTest {
 //	実際にデータベースを動かすのでスタブは使用しない
 	@Autowired
 	private ManageDatesMapper sut;
-	
 	
 	@Test
 	void 全件検索して結果をリストで取得できること() throws Exception {

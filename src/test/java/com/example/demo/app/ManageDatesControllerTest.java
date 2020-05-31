@@ -1,16 +1,9 @@
 package com.example.demo.app;
 
-import static org.hamcrest.CoreMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.util.List;
-
-import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,13 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.example.demo.domain.ManageDates;
-import com.example.demo.repository.ManageDatesMapper;
 import com.example.demo.service.ManageDatesService;
-import com.mysql.cj.x.protobuf.MysqlxCrud.Insert;
 
 
 
@@ -51,10 +39,10 @@ private ManageDatesController target;
 @Autowired
 private MockMvc sut;
 
-//＠AutoConfigureMockMvcを使用したら不要
+//＠AutoConfigureMockMvcを使用したら不要だった。何故これが動かないかは謎。
 //@Before
 //public void setUp() throws Exception {
-////	tymeleafを使用している場合、MockMVCはHTMLファイルテンプレートの場所やページファイルの拡張子が.htmlであることを理解してくれないようです。
+////	tymeleafを使用している場合、MockMVCはHTMLファイルテンプレートの場所やページファイルの拡張子が.htmlであることを理解してくれない。
 ////	そのため、循環ビューが発生しているなどのエラーが吐かれる。以下に明示して対処。
 //	InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 //	viewResolver.setPrefix("classpath:templates/");
@@ -79,30 +67,11 @@ public void 新規登録画面のリクエストが正常となりViewとしてc
 }
 
 @Test
-public void 新規登録画面で登録処理を行うとサービスで処理されて計算実行画面に遷移すること() throws Exception {
-//	テスト用のFormをインスタンス化
-	ManageDates manageDates = insertForm("テスト", "テスト", 0, 0, 0);
-//	テスト用
-	ManageDatesMapper manageDatesMapper = insertMapper()
-	
-	sut.perform(post("/crete").param("id", "Test").param("name", "テスト"))
+public void 編集画面のリクエストが正常となりViewとしてeditが返ること() throws Exception {
+	sut.perform(get("/edit/{id}"))
 	   .andExpect(status().isOk())
-	   .andExpect(view().name("/index"));
-	
-	verify(service, times(1));
-}
-	
-//テスト用Formクラスの作成
-public ManageDates insertForm(String id, String name, int year, int month, int date) {
-	ManageDates manageDates = new ManageDates();
-	manageDates.setId(id);
-	manageDates.setName(name);
-	manageDates.setYear(year);
-	manageDates.setMonth(month);
-	manageDates.setDate(date);
-	
-	return manageDates;
+	   .andExpect(view().name("/edit"));
 }
 
-
 }
+
